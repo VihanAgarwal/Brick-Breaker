@@ -11,17 +11,40 @@ import java.awt.event.MouseEvent;
  */
 public class BreakoutProgram extends GraphicsProgram {
 
-    private static final int PAUSE_TIME = 10;
-    private int dX=2;
-    private int dY=2;
+    private static final int PAUSE_TIME = 5;
+    private static final int SCREEN_WIDTH =750;
+    private static final int SCREEN_HEIGHT=1000;
+    private static final int NO_OF_BRICKS=50;
+    private double BrickX=0;
+    private double BrickY=0;
+    private int dX=1;
+    private int dY=1;
     private BreakoutBall gameBall;
     private Paddle gamePaddle;
+    private Brick gameBricks[];
 
     public void init(){
 
         gameBall = new BreakoutBall();
-        add(gameBall.getBall(),getWidth()/2,getHeight()/2);
+        add(gameBall.getBall(),SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
+
         gamePaddle = new Paddle();
+        gamePaddle.setyPos(SCREEN_HEIGHT-125);
+        add(gamePaddle.getPaddle(),SCREEN_WIDTH/2 ,SCREEN_HEIGHT-125);
+
+        gameBricks = new Brick[NO_OF_BRICKS];
+
+        for(int i=0;i<gameBricks.length;i++){
+            gameBricks[i] = new Brick();
+            if(BrickX>getWidth()-gameBricks[i].getBrickWidth()){
+                BrickY+=gameBricks[i].getBrickHeight();
+                BrickX=0;
+            }
+            add(gameBricks[i].getBrick(),BrickX,BrickY);
+
+            BrickX+=gameBricks[i].getBrickWidth();
+        }
+
         addMouseListeners();
 
 
@@ -29,9 +52,8 @@ public class BreakoutProgram extends GraphicsProgram {
 
     public void run() {
         //these would all be in init, however the screen size doesnt set up in init due to a bug.
-        setSize(750,1000);
-        gamePaddle.setyPos(getHeight()-75);
-        add(gamePaddle.getPaddle(),getWidth()/2 ,getHeight()-75);
+        setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
+
 
         while(true){
 
