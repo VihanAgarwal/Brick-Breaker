@@ -25,6 +25,14 @@ public class Paddle {
         return yPos;
     }
 
+    public void setyPos(double yPos) {
+        this.yPos = yPos;
+    }
+
+    public void setxPos(double xPos) {
+        this.xPos = xPos;
+    }
+
     public GRect getPaddle() {
         return paddle;
     }
@@ -42,5 +50,12 @@ public class Paddle {
         }
         return false;
     }
+    public void movePaddle(double xPos){
+        this.xPos=xPos;
+        paddle.setLocation(this.xPos,this.yPos);
+    }
 
+    public static double getPaddleWidth() {
+        return PADDLE_WIDTH;
+    }
 }

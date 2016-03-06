@@ -2,6 +2,8 @@ package edu.macalester.comp124.breakout;
 
 import acm.program.GraphicsProgram;
 
+import java.awt.event.MouseEvent;
+
 /**
  * Main GraphicsProgram for the breakout game described
  * in exercise 10.10 int the Roberts Textbook.
@@ -10,8 +12,8 @@ import acm.program.GraphicsProgram;
 public class BreakoutProgram extends GraphicsProgram {
 
     private static final int PAUSE_TIME = 10;
-    private int dX=1;
-    private int dY=1;
+    private int dX=2;
+    private int dY=2;
     private BreakoutBall gameBall;
     private Paddle gamePaddle;
 
@@ -20,12 +22,15 @@ public class BreakoutProgram extends GraphicsProgram {
         gameBall = new BreakoutBall();
         add(gameBall.getBall(),getWidth()/2,getHeight()/2);
         gamePaddle = new Paddle();
+        addMouseListeners();
 
 
     }
 
     public void run() {
+        //these would all be in init, however the screen size doesnt set up in init due to a bug.
         setSize(750,1000);
+        gamePaddle.setyPos(getHeight()-75);
         add(gamePaddle.getPaddle(),getWidth()/2 ,getHeight()-75);
 
         while(true){
@@ -53,6 +58,14 @@ public class BreakoutProgram extends GraphicsProgram {
 
         }
 
+    }
+
+    public void mouseMoved(MouseEvent e){
+        double xPos = e.getX();
+        if(xPos+ gamePaddle.getPaddleWidth()>getWidth()){
+            xPos=gamePaddle.getxPos();
+        }
+        gamePaddle.movePaddle(xPos);
     }
 
 }
