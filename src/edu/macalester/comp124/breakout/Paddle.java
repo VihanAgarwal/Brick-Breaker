@@ -8,54 +8,27 @@ import java.awt.*;
 /**
  * Created by Vihan on 3/6/2016.
  */
-public class Paddle {
+public class Paddle extends GRect {
 
     private static final double PADDLE_WIDTH = 120.0;
-    private static final double PADDLE_HEIGHT = 12.0;
-
-    private double xPos;
-    private double yPos;
-    private GRect paddle;
-
-    public double getxPos() {
-        return xPos;
-    }
-
-    public double getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(double yPos) {
-        this.yPos = yPos;
-    }
-
-    public void setxPos(double xPos) {
-        this.xPos = xPos;
-    }
-
-    public GRect getPaddle() {
-        return paddle;
-    }
+    private static final double PADDLE_HEIGHT = 15.0;
+    private static final Color PADDLE_COLOR= Color.darkGray;
+    private double xPos =0;
+    private static final double Y_POS=875;
 
     public Paddle(){
-        paddle = new GRect(0,0,PADDLE_WIDTH,PADDLE_HEIGHT);
-        paddle.setColor(Color.gray);
-        paddle.setFilled(true);
-        paddle.setFillColor(Color.gray);
+        super(PADDLE_WIDTH,PADDLE_HEIGHT);
+        setColor(PADDLE_COLOR);
+        setFilled(true);
+        setFillColor(PADDLE_COLOR);
     }
 
-    public boolean checkCollision(double yPos){
-        if(yPos>paddle.getY()){
-            return true;
-        }
-        return false;
-    }
     public void movePaddle(double xPos){
         this.xPos=xPos;
-        paddle.setLocation(this.xPos,this.yPos);
+        setLocation(this.xPos,Y_POS);
     }
 
-    public static double getPaddleWidth() {
-        return PADDLE_WIDTH;
+    public static double getyPos() {
+        return Y_POS;
     }
 }

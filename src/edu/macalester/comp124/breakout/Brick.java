@@ -1,43 +1,34 @@
 package edu.macalester.comp124.breakout;
 
+import acm.graphics.GOval;
 import acm.graphics.GRect;
+import acm.util.RandomGenerator;
 
 import java.awt.*;
 
 /**
  * Created by Vihan on 3/6/2016.
  */
-public class Brick {
+public class Brick extends GRect{
 
     private static final double BRICK_HEIGHT=25;
-    private static final double BRICK_WIDTH=72.5;
+    private static final double BRICK_WIDTH=67.5;
 
-    private GRect brick;
 
     public Brick(){
-        brick = new GRect(BRICK_WIDTH,BRICK_HEIGHT);
-        brick.setColor(Color.black);
-        brick.setFilled(true);
-        brick.setFillColor(Color.blue);
+        super(BRICK_WIDTH,BRICK_HEIGHT);
+        RandomGenerator rgen = new RandomGenerator();
+        Color brickColor = rgen.nextColor();
+        setColor(brickColor);
+        setFilled(true);
+        setFillColor(brickColor);
     }
 
-    public GRect getBrick(){
-        return brick;
-    }
-
-    public double getBrickHeight(){
+    public static double getBrickHeight() {
         return BRICK_HEIGHT;
     }
 
-    public double getBrickWidth(){
+    public static double getBrickWidth() {
         return BRICK_WIDTH;
-    }
-
-    public double getXLocation(){
-        return brick.getX();
-    }
-
-    public double getYLocation(){
-        return brick.getY();
     }
 }
