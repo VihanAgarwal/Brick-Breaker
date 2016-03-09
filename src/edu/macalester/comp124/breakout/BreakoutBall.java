@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class BreakoutBall extends GOval{
 
-    private static final double BALL_RADIUS = 15.0;
+    private static final double BALL_RADIUS = 10.0;
     private static final Color BALL_COLOR=Color.BLACK;;
     private double dX=1;
     private double dY=1;
@@ -53,14 +53,22 @@ public class BreakoutBall extends GOval{
     }
 
     public void checkPaddleCollision(GRect paddle){
+
         boolean isOverPaddle = false;
-        if( (getX()>paddle.getX()) && (getX()+getWidth()<paddle.getX()+paddle.getWidth())){
+        double farX = getX()+getWidth();
+        double farY = getY() + getWidth();
+
+        if( (farX>=paddle.getX()) && (getX()<=paddle.getX()+paddle.getWidth())){
          isOverPaddle=true;
         }
 
-        if((getY()+ getHeight()>=paddle.getY())&& isOverPaddle){
+
+        if((farY>=paddle.getY())&& isOverPaddle){
             flipY();
+            return;
         }
+
+
     }
 
 
