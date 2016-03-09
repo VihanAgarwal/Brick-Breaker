@@ -53,7 +53,16 @@ public class BreakoutProgram extends GraphicsProgram {
         while(true){
             gameBall.moveBall();
             gameBall.checkWallCollision(getWidth(),getHeight());
-            gameBall.checkPaddleColision(gamePaddle);
+            gameBall.checkPaddleCollision(gamePaddle);
+            gameBricks.checkBallCollision(gameBall);
+
+            if(gameBricks.isHitBrickHorizontal()){
+                gameBall.flipX();
+            }
+            if(gameBricks.isHitBrickVertical()){
+                gameBall.flipY();
+            }
+
             pause(PAUSE_TIME);
         }
 
@@ -74,5 +83,9 @@ public class BreakoutProgram extends GraphicsProgram {
 
     public double getScreenHeight() {
         return SCREEN_HEIGHT;
+    }
+
+    public static double getyOffset() {
+        return Y_OFFSET;
     }
 }

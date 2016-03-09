@@ -52,7 +52,7 @@ public class BreakoutBall extends GOval{
         }
     }
 
-    public void checkPaddleColision(GRect paddle){
+    public void checkPaddleCollision(GRect paddle){
         boolean isOverPaddle = false;
         if( (getX()>paddle.getX()) && (getX()+getWidth()<paddle.getX()+paddle.getWidth())){
          isOverPaddle=true;
