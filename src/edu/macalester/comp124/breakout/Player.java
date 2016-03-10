@@ -26,6 +26,10 @@ public class Player {
         playerLives-=1;
     }
 
+    public int getPlayerScore() {
+        return playerScore;
+    }
+
     @Override
     public String toString(){
         return "Score: " + playerScore + "  Lives: " +playerLives;

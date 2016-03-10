@@ -11,7 +11,7 @@ import java.awt.*;
 public class Paddle extends GRect {
 
     private static final double PADDLE_WIDTH = 120.0;
-    private static final double PADDLE_HEIGHT = 20.0;
+    private static final double PADDLE_HEIGHT = 15.0;
     private static final Color PADDLE_COLOR= Color.darkGray;
     private double xPos =0;
     private static final double Y_POS=875;

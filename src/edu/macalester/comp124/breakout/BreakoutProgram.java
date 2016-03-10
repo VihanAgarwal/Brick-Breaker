@@ -63,7 +63,7 @@ public class BreakoutProgram extends GraphicsProgram {
         //these would all be in init, however the screen size doesnt set up in init due to a bug.
         setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
 
-        while(gamePlayer.getPlayerLives()>0){
+        while(gamePlayer.getPlayerLives()>=0 && testForWin()){
 
             gameBall.moveBall();
             gameBall.checkWallCollision(getWidth(),getHeight());
@@ -86,19 +86,28 @@ public class BreakoutProgram extends GraphicsProgram {
             }
 
 
-
-
-
             playerStats.setLabel(gamePlayer.toString());
             pause(PAUSE_TIME);
         }
 
+        if(testForWin()){
+            GLabel endLabel = new GLabel("You Win!");
+            endLabel.setFont(new Font("Helvetica",Font.BOLD,20));
+            add(endLabel,getWidth()/2 - endLabel.getWidth()/2,getHeight()/2);
+        }else{
+            GLabel endLabel = new GLabel("You Lose!");
+            endLabel.setFont(new Font("Helvetica",Font.BOLD,20));
+            add(endLabel,getWidth()/2 - endLabel.getWidth()/2,getHeight()/2);
+        }
+
+        pause(5000);
+        System.exit(-1);
 
     }
 
     public void resetBall(){
         remove(gameBall);
-        GLabel reset = new GLabel("Ouch!");
+        GLabel reset = new GLabel("DEAD!");
         reset.setFont(new Font("Helvetica", Font.BOLD, 28));
         gamePlayer.reduceLives();
         add(reset,(getWidth()/2),getHeight()/2);
@@ -120,6 +129,12 @@ public class BreakoutProgram extends GraphicsProgram {
         gamePaddle.movePaddle(xPos);
     }
 
+    public boolean testForWin() {
+        if(gameBricks.getElementCount()==0){
+            return true;
+        }
+        return false;
+    }
     public double getScreenWidth() {
         return SCREEN_WIDTH;
     }

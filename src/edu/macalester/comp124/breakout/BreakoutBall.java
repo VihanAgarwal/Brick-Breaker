@@ -54,23 +54,26 @@ public class BreakoutBall extends GOval{
 
     public void checkPaddleCollision(GRect paddle){
 
-        boolean isOverPaddle = false;
+        boolean isWithinPaddle = false;
         double farX = getX()+getWidth();
         double farY = getY() + getWidth();
 
         if( (farX>=paddle.getX()) && (getX()<=paddle.getX()+paddle.getWidth())){
-         isOverPaddle=true;
+         isWithinPaddle=true;
         }
 
-
-        if((farY>=paddle.getY())&& isOverPaddle){
+        if((isWithinPaddle)&& (farY>paddle.getY()) && (farY< paddle.getY()+paddle.getHeight())){
+            setLocation(getX(),paddle.getY()-getHeight());
             flipY();
             return;
         }
 
+        if((farY>=paddle.getY())&& isWithinPaddle){
+            flipY();
+        }
+
 
     }
-
 
 
 }
