@@ -63,7 +63,7 @@ public class BreakoutProgram extends GraphicsProgram {
         //these would all be in init, however the screen size doesnt set up in init due to a bug.
         setSize(SCREEN_WIDTH,SCREEN_HEIGHT);
 
-        while(gamePlayer.getPlayerLives()>=0 && testForWin()){
+        while(gamePlayer.getPlayerLives()>=0){
 
             gameBall.moveBall();
             gameBall.checkWallCollision(getWidth(),getHeight());
@@ -88,13 +88,19 @@ public class BreakoutProgram extends GraphicsProgram {
 
             playerStats.setLabel(gamePlayer.toString());
             pause(PAUSE_TIME);
+
+            if(testForWin()){
+                break;
+            }
         }
 
         if(testForWin()){
+            removeAll();
             GLabel endLabel = new GLabel("You Win!");
             endLabel.setFont(new Font("Helvetica",Font.BOLD,20));
             add(endLabel,getWidth()/2 - endLabel.getWidth()/2,getHeight()/2);
         }else{
+            removeAll();
             GLabel endLabel = new GLabel("You Lose!");
             endLabel.setFont(new Font("Helvetica",Font.BOLD,20));
             add(endLabel,getWidth()/2 - endLabel.getWidth()/2,getHeight()/2);
@@ -107,17 +113,17 @@ public class BreakoutProgram extends GraphicsProgram {
 
     public void resetBall(){
         remove(gameBall);
-        GLabel reset = new GLabel("DEAD!");
+        GLabel reset = new GLabel("!!");
         reset.setFont(new Font("Helvetica", Font.BOLD, 28));
         gamePlayer.reduceLives();
-        add(reset,(getWidth()/2),getHeight()/2);
+        add(reset,getWidth()/2,getHeight()/2);
         pause(2000);
-
-        for(int i=3;i>0;i--) {
-            reset.setLabel(Integer.toString(i));
-            pause(1000);
+        if(gamePlayer.getPlayerLives()>=0) {
+            for (int i = 3; i > 0; i--) {
+                reset.setLabel(Integer.toString(i));
+                pause(1000);
+            }
         }
-
         remove(reset);
 
     }

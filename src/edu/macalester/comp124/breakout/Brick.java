@@ -15,6 +15,7 @@ public class Brick extends GRect{
     private static final double BRICK_WIDTH=67.5;
 
 
+
     public Brick(){
         super(BRICK_WIDTH,BRICK_HEIGHT);
         RandomGenerator rgen = new RandomGenerator();
