@@ -11,15 +11,22 @@ import java.awt.*;
 public class BreakoutBall extends GOval{
 
     private static final double BALL_RADIUS = 10.0;
-    private static final Color BALL_COLOR=Color.BLACK;;
+    private static final Color BALL_COLOR=new Color(32,178,170);
+
+    //Instance variables
     private double dX=1;
     private double dY=1;
+    private boolean isOnFire; //if the ball is on fire
 
+    /**
+     * Constructor to initialize the ball to a new GOval.
+     */
     public BreakoutBall(){
         super(BALL_RADIUS,BALL_RADIUS);
         setColor(BALL_COLOR);
         setFilled(true);
         setFillColor(BALL_COLOR);
+        isOnFire=false;
     }
 
 
@@ -52,6 +59,10 @@ public class BreakoutBall extends GOval{
         }
     }
 
+    /**
+     * Checks if the ball has collided with a specific paddle.
+     * @param paddle gamePaddle.
+     */
     public void checkPaddleCollision(GRect paddle){
 
         boolean isWithinPaddle = false;
@@ -75,5 +86,28 @@ public class BreakoutBall extends GOval{
 
     }
 
+    /**
+     *
+     * @return If the ball is on fire or not.
+     */
+    public boolean isOnFire() {
+        return isOnFire;
+    }
+
+    /**
+     * Setter for on fire
+     * @param onFire if the ball is on fire or not.
+     */
+    public void setOnFire(boolean onFire) {
+        isOnFire = onFire;
+    }
+
+    /**
+     *
+     * @return Returns the color of the ball so that the game can be restored.
+     */
+    public static Color getBallColor() {
+        return BALL_COLOR;
+    }
 
 }
